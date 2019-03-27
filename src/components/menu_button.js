@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MenuButton = ({link, text}) => {
+const MenuButton = ({onClick, link, text}) => {
 	return <div className="btn-wrap">
-		<a href={link} className="btn btn-white btn-animated">
+		<a onClick={onClick} href={link} className="btn btn-white btn-animated">
 			{text}
 		</a>
 	</div>
