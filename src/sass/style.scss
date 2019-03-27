@@ -1,4 +1,9 @@
 
+$color-white: #fff;
+$color-lightblue: rgb(87, 202, 255);
+$color-green: rgb(38, 238, 145);
+$color-darkblue: rgb(28, 28, 32);
+
 
 * {
 	margin: 0;
@@ -6,7 +11,7 @@
 }
 
 body {
-	background-color: rgb(33, 29, 78);
+	background-color: $color-darkblue;
 }
 
 
@@ -44,10 +49,19 @@ body {
 
 
 .btn-white{
-	background-color: #fff;
-	color: #777;
+	background-color: $color-white;
+	color: $color-white;
 }
 
+.btn-light-blue{
+	background-color: $color-lightblue;
+	color: #000;	
+}
+
+.btn-green{
+	background-color: $color-green;
+	color: #000
+}
 
 .btn:hover {
 	transform: translateY(-3px);
@@ -74,12 +88,25 @@ body {
 
 
 .btn-white::after{
-	background-color: #fff;
+	background-color: $color-white;
+}
+
+.btn-light-blue::after{
+	background-color: $color-lightblue;
+}
+
+.btn-green::after{
+	background-color: $color-green;
 }
 
 
 .btn:hover::after {
-	background-color: #fff;
+	background-color: $color-white;
 	transform: scale(1.5, 1.7);
 	opacity: 0;
+}
+
+
+.game {
+	color: $color-white;
 }

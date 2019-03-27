@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 
 class Game extends Component{
 	render() {
-		return <div>
-			asdasdasd
+		return <div className="game">
+			
 		</div>
 	}
 } 
