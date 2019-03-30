@@ -110,3 +110,24 @@ body {
 .game {
 	color: $color-white;
 }
+
+.board {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 360px;
+	height: 523px;
+	border: 1px solid $color-white;
+	border-radius: 3px;
+}
+
+.square{
+	margin-top: -1px;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px rgba(255, 255, 255, 0.068);
+	display: inline-block;
+	// border: 1px solid $color-lightblue;
+	height: 30px;
+	width: 30px;
+}
