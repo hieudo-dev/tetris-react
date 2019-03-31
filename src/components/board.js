@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Square from './square';
-import { tetrominoColors, tetrominoSquares, validTetromino, rotatedTetromino } from "./tetromino";
+import { tetrominoColors, tetrominoSquares, validTetromino, rotatedTetromino, randomTetromino } from "./tetromino";
 
 class Board extends Component{
 	rows = 18
@@ -10,7 +10,7 @@ class Board extends Component{
 		super(props);
 		this.state = {
 			currentPos: [0, 5],
-			type: "I1",
+			type: randomTetromino(),
 			board: Array(this.rows).fill(Array(this.cols).fill("none"))
 		};
 	}
@@ -55,6 +55,12 @@ class Board extends Component{
 		const type = this.state.type;
 		if (validTetromino([cur[0]+1, cur[1]], type, this.rows, this.cols)){
 			this.setState({currentPos: [cur[0]+1, cur[1]]});
+		}else{
+			this.setState({
+				currentPos: [0, 5],
+				type: randomTetromino(),
+				board: this.finalBoard()
+			});
 		}
 	}
 

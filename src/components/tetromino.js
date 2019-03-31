@@ -14,10 +14,25 @@ export const tetrominoColors = {
 	'Lr3': "blue",
 	'Z': "green",
 	'Z1': "green",
-	'Z1': "green",
+	'Zr': "green",
+	'Zr1': "green",
 	'I': "cyan",
 	'I1': "cyan"
 };
+
+const randTetroID = {
+	0: "O",
+	1: "T",
+	2: "L",
+	3: "Lr",
+	4: "Z",
+	5: "Zr",
+	6: "I"
+};
+
+export const randomTetromino = () => {
+	return randTetroID[Math.floor(Math.random() * 7)];
+}
 
 export const tetrominoSquares = (position, type) => {
 	const x = position[0], y = position[1];
@@ -74,6 +89,8 @@ export const validTetromino = (position, type, row, col) => {
 
 export const rotatedTetromino = type => {
 	switch(type){
+		case "O":
+			return "O";
 		case "T":
 			return "T1";
 		case "T1":
