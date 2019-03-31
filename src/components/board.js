@@ -56,16 +56,26 @@ class Board extends Component{
 		if (validTetromino([cur[0]+1, cur[1]], type, this.rows, this.cols, this.state.board)){
 			this.setState({currentPos: [cur[0]+1, cur[1]]});
 		}else{
+			const board = this.finalBoard();
+			let newBoard = [];
+			board.map(row => {
+				const usedSquares = row.filter(x => x !== "none").length;
+				if (usedSquares !== 0 && usedSquares !== this.cols)
+					newBoard.push(row);
+				else
+					newBoard.unshift(Array(this.cols).fill("none"));
+			});
+			
 			this.setState({
 				currentPos: [0, 5],
 				type: randomTetromino(),
-				board: this.finalBoard()
+				board: newBoard
 			});
 		}
 	}
 
 	componentDidMount(){
-		this.id = setInterval(() => this.dropDown(), 1000);
+		this.id = setInterval(() => this.dropDown(), 150);
 		document.addEventListener("keydown", event => this.inputHandler(event), false);
 	}
 
