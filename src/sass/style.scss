@@ -1,9 +1,12 @@
 
 $color-white: #fff;
 $color-lightblue: rgb(87, 202, 255);
+$color-blue: rgb(55, 55, 255);
 $color-green: rgb(38, 238, 145);
 $color-darkblue: rgb(28, 28, 32);
-
+$color-yellow: yellow;
+$color-red: rgb(238, 70, 70);
+$color-cyan: rgb(0, 255, 255);
 
 * {
 	margin: 0;
@@ -63,27 +66,34 @@ body {
 	color: #000
 }
 
-.btn:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 5px 10px #00000065;
-}
+.btn{
+	&:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 10px #00000065;
+	}
+	
+	&:active {
+		transform: translateY(-1px);
+	}
 
+	&::after {
+		content: "";
+		display: inline-block;
+		height: 100%;
+		width: 100%;
+		border-radius: 100px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		transition: all .5s;
+	}
 
-.btn:active {
-	transform: translateY(-1px);
-}
-
-.btn::after {
-	content: "";
-	display: inline-block;
-	height: 100%;
-	width: 100%;
-	border-radius: 100px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
-	transition: all .5s;
+	&:hover::after {
+		background-color: $color-white;
+		transform: scale(1.5, 1.7);
+		opacity: 0;
+	}
 }
 
 
@@ -100,13 +110,6 @@ body {
 }
 
 
-.btn:hover::after {
-	background-color: $color-white;
-	transform: scale(1.5, 1.7);
-	opacity: 0;
-}
-
-
 .game {
 	color: $color-white;
 }
@@ -115,19 +118,42 @@ body {
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	padding-top: 3px;
 	transform: translate(-50%, -50%);
-	width: 360px;
-	height: 523px;
+	width: 361px;
+	height: 540px;
 	border: 1px solid $color-white;
 	border-radius: 3px;
 }
 
 .square{
-	margin-top: -1px;
+	border-radius: 1px;
+	margin: -2px 0px;
 	box-sizing: border-box;
 	box-shadow: 0 0 5px rgba(255, 255, 255, 0.068);
 	display: inline-block;
-	// border: 1px solid $color-lightblue;
 	height: 30px;
 	width: 30px;
+
+	
+}
+
+.square-yellow{
+	background-color: $color-yellow;
+}
+
+.square-red{
+	background-color: $color-red;
+}
+
+.square-blue{
+	background-color: $color-blue;
+}
+
+.square-green{
+	background-color: $color-green;
+}
+
+.square-cyan{
+	background-color: $color-cyan;
 }
