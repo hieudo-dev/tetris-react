@@ -80,10 +80,12 @@ export const tetrominoSquares = (position, type) => {
 	}
 };
 
-export const validTetromino = (position, type, row, col) => {
+export const validTetromino = (position, type, row, col, board) => {
 	const squares = tetrominoSquares(position, type);
-	const r = squares.map(square => square[0] >= 0 && square[0] < row &&
-									 square[1] >= 0 && square[1] < col);
+	const r = squares.map(
+		square => square[0] >= 0 && square[0] < row &&
+		square[1] >= 0 && square[1] < col && 
+		board[square[0]][square[1]] === "none");
 	return !r.includes(false);
 };
 

@@ -28,18 +28,18 @@ class Board extends Component{
 
 		switch(event.keyCode){
 			case 37:	// Left
-				if (validTetromino([pos[0], pos[1]-1], type, this.rows, this.cols))
+				if (validTetromino([pos[0], pos[1]-1], type, this.rows, this.cols, this.state.board))
 					this.setState({currentPos: [pos[0], pos[1]-1]});
 				return;
 			case 38: // Up
 				let newType = rotatedTetromino(type);
-				if (validTetromino(pos, newType, this.rows, this.cols))
+				if (validTetromino(pos, newType, this.rows, this.cols, this.state.board))
 				{
 					this.setState({type: newType});
 				}
 				return;
 			case 39: // Right
-				if (validTetromino([pos[0], pos[1]+1], type, this.rows, this.cols))
+				if (validTetromino([pos[0], pos[1]+1], type, this.rows, this.cols, this.state.board))
 					this.setState({currentPos: [pos[0], pos[1]+1]});
 				return;
 			case 40: // Down
@@ -53,7 +53,7 @@ class Board extends Component{
 	dropDown() {
 		const cur = this.state.currentPos;
 		const type = this.state.type;
-		if (validTetromino([cur[0]+1, cur[1]], type, this.rows, this.cols)){
+		if (validTetromino([cur[0]+1, cur[1]], type, this.rows, this.cols, this.state.board)){
 			this.setState({currentPos: [cur[0]+1, cur[1]]});
 		}else{
 			this.setState({
