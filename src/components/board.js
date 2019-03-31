@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Square from './square';
+import { tetrominoColors, tetrominoSquares, validTetromino, rotatedTetromino } from "./tetromino";
 
 class Board extends Component{
 	rows = 18
@@ -16,69 +17,50 @@ class Board extends Component{
 
 	finalBoard(){
 		const b = this.state.board.map(x => x.slice());
-		const x = this.state.currentPos[0], y = this.state.currentPos[1];
-		switch (this.state.type) {
-			case "O":
-				b[x][y] = b[x+1][y] = b[x][y+1] = b[x+1][y+1] = "yellow";
-				break;
-			case "T":
-				b[x][y] = b[x+1][y] = b[x+1][y-1] = b[x+1][y+1] = "red";
-				break;
-			case "T1":
-				b[x][y] = b[x+1][y] = b[x+2][y] = b[x+1][y+1] = "red";
-				break;
-			case "T2":
-				b[x][y] = b[x][y+1] = b[x][y-1] = b[x+1][y] = "red";
-				break;
-			case "T3":
-				b[x][y] = b[x+1][y] = b[x+2][y] = b[x+1][y-1] = "red";
-				break;
-			case "L":
-				b[x][y] = b[x+1][y] = b[x+2][y] = b[x+2][y+1] = "blue";
-				break;
-			case "L1":
-				b[x][y] = b[x][y+1] = b[x][y-1] = b[x+1][y-1] = "blue";
-				break;
-			case "L2":
-				b[x][y] = b[x][y-1] = b[x+1][y] = b[x+2][y] = "blue";
-				break;
-			case "L3":
-				b[x][y+1] = b[x+1][y+1] = b[x+1][y] = b[x+1][y-1] = "blue";
-				break;
-			case "Lr":
-				b[x][y] = b[x+1][y] = b[x+2][y] = b[x+2][y-1] = "blue";
-				break;
-			case "Lr1":
-				b[x+1][y] = b[x+1][y+1] = b[x+1][y-1] = b[x][y-1] = "blue";
-				break;
-			case "Lr2":
-				b[x][y] = b[x][y+1] = b[x+1][y] = b[x+2][y] = "blue";
-				break;
-			case "Lr3":
-				b[x][y] = b[x][y+1] = b[x][y-1] = b[x+1][y+1] = "blue";
-				break;
-			case "Z":
-				b[x][y] = b[x][y-1] = b[x+1][y] = b[x+1][y+1] = "green";
-				break;
-			case "Z1":
-				b[x][y+1] = b[x+1][y] = b[x+2][y] = b[x+1][y+1] = "green";
-				break;
-			case "Zr":
-				b[x][y] = b[x][y+1] = b[x+1][y] = b[x+1][y-1] = "green";
-				break;
-			case "Zr1":
-				b[x][y] = b[x+1][y] = b[x+1][y+1] = b[x+2][y+1] = "green";
-				break;
-			case "I":
-				b[x][y] = b[x+1][y] = b[x+2][y] = b[x+3][y] = "cyan";
-				break;
-			case "I1":
-				b[x][y] = b[x][y-1] = b[x][y+1] = b[x][y+2] = "cyan";
+		tetrominoSquares(this.state.currentPos, this.state.type).map(
+			square => b[square[0]][square[1]] = tetrominoColors[this.state.type])
+		return b;
+	}
+
+	inputHandler(event){
+		const type = this.state.type;
+		const pos = this.state.currentPos;
+
+		switch(event.keyCode){
+			case 37:	// Left
+				if (validTetromino([pos[0], pos[1]-1], type, this.rows, this.cols))
+					this.setState({currentPos: [pos[0], pos[1]-1]});
+				return;
+			case 38: // Up
+				let newType = rotatedTetromino(type);
+				if (validTetromino(pos, newType, this.rows, this.cols))
+				{
+					this.setState({type: newType});
+				}
+				return;
+			case 39: // Right
+				if (validTetromino([pos[0], pos[1]+1], type, this.rows, this.cols))
+					this.setState({currentPos: [pos[0], pos[1]+1]});
+				return;
+			case 40: // Down
+				// TODO: Increase drop speed 
 				break;
 			default:
 				break;
 		}
-		return b;
+	}
+
+	dropDown() {
+		const cur = this.state.currentPos;
+		const type = this.state.type;
+		if (validTetromino([cur[0]+1, cur[1]], type, this.rows, this.cols)){
+			this.setState({currentPos: [cur[0]+1, cur[1]]});
+		}
+	}
+
+	componentDidMount(){
+		this.id = setInterval(() => this.dropDown(), 1000);
+		document.addEventListener("keydown", event => this.inputHandler(event), false);
 	}
 
 	render() {
