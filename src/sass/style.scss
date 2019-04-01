@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 $color-white: #fff;
 $color-lightblue: rgb(0, 163, 238);
 $color-blue: rgb(0, 0, 224);
 $color-green: rgb(0, 216, 115);
-$color-darkblue: rgb(28, 28, 32);
+$color-darkblue: rgb(34, 34, 46);
 $color-yellow: rgb(245, 245, 6);
 $color-red: rgb(194, 48, 48);
 $color-cyan: rgb(46, 216, 216);
+$font-scoreboard: 'Raleway', sans-serif;
 
 * {
 	margin: 0;
@@ -15,6 +17,7 @@ $color-cyan: rgb(46, 216, 216);
 
 body {
 	background-color: $color-darkblue;
+	color: $color-white;
 }
 
 
@@ -156,4 +159,26 @@ body {
 
 .square-cyan{
 	background-color: $color-cyan;
+}
+
+.square-none{
+	background-color: lighten($color: $color-darkblue, $amount: 5)
+}
+
+.score-board{
+	font-family: $font-scoreboard;
+	text-align: center;
+	position: absolute;
+	left: 75%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.score-label{
+	font-weight: bolder;
+}
+
+.score-value{
+	color: greenyellow;
+	padding-bottom: 20px;
 }
