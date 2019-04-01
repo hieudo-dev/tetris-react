@@ -9,6 +9,7 @@ class Board extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
+			ended: false,
 			currentPos: [0, 5],
 			type: randomTetromino(),
 			board: Array(this.rows).fill(Array(this.cols).fill("none"))
@@ -23,6 +24,8 @@ class Board extends Component{
 	}
 
 	inputHandler(event){
+		if (this.ended)
+			return;
 		const type = this.state.type;
 		const pos = this.state.currentPos;
 
@@ -66,9 +69,17 @@ class Board extends Component{
 					newBoard.unshift(Array(this.cols).fill("none"));
 			});
 			
+			const newTetro = randomTetromino();
+			if (!validTetromino([0, 5], newTetro, this.rows, this.cols, newBoard)){
+				// GAMEOVER
+				clearInterval(this.id);
+				this.ended = true;
+				return;
+			}
+			
 			this.setState({
 				currentPos: [0, 5],
-				type: randomTetromino(),
+				type: newTetro,
 				board: newBoard
 			});
 		}
