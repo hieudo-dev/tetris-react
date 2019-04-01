@@ -9,7 +9,6 @@ class Board extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			ended: false,
 			currentPos: [0, 5],
 			type: randomTetromino(),
 			board: Array(this.rows).fill(Array(this.cols).fill("none"))
@@ -24,7 +23,7 @@ class Board extends Component{
 	}
 
 	inputHandler(event){
-		if (this.ended)
+		if (this.props.ended)
 			return;
 		const type = this.state.type;
 		const pos = this.state.currentPos;
@@ -61,17 +60,28 @@ class Board extends Component{
 		}else{
 			const board = this.finalBoard();
 			let newBoard = [];
+			let cleared = 0;
+
+			// Count the amount of cleared lines and build the updated board
 			board.map(row => {
 				const usedSquares = row.filter(x => x !== "none").length;
 				if (usedSquares !== 0 && usedSquares !== this.cols)
 					newBoard.push(row);
-				else
+				else{
+					if (usedSquares === this.cols)
+						cleared++;
 					newBoard.unshift(Array(this.cols).fill("none"));
+				}
 			});
 			
+			// Callback to inscrease score
+			if(cleared !== 0)
+				this.props.clearedLines(cleared);
+
 			const newTetro = randomTetromino();
 			if (!validTetromino([0, 5], newTetro, this.rows, this.cols, newBoard)){
 				// GAMEOVER
+				this.props.endGameHandler();
 				clearInterval(this.id);
 				this.ended = true;
 				return;
