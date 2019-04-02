@@ -5,6 +5,9 @@ import { tetrominoColors, tetrominoSquares, validTetromino, rotatedTetromino, ra
 class Board extends Component{
 	rows = 18
 	cols = 12
+	itvlId = 0;
+	paused = true;
+	speed = 250;
 
 	constructor(props){
 		super(props);
@@ -30,22 +33,30 @@ class Board extends Component{
 
 		switch(event.keyCode){
 			case 37:	// Left
+				if(this.paused)	return;
 				if (validTetromino([pos[0], pos[1]-1], type, this.rows, this.cols, this.state.board))
-					this.setState({currentPos: [pos[0], pos[1]-1]});
+				this.setState({currentPos: [pos[0], pos[1]-1]});
 				return;
 			case 38: // Up
+				if(this.paused)	return;
 				let newType = rotatedTetromino(type);
 				if (validTetromino(pos, newType, this.rows, this.cols, this.state.board))
-				{
 					this.setState({type: newType});
-				}
 				return;
 			case 39: // Right
+				if(this.paused)	return;
 				if (validTetromino([pos[0], pos[1]+1], type, this.rows, this.cols, this.state.board))
 					this.setState({currentPos: [pos[0], pos[1]+1]});
 				return;
 			case 40: // Down
 				// TODO: Increase drop speed 
+				break;
+			case 32: // Play/Pause
+				if (this.paused)
+					this.itvlId = setInterval(() => this.dropDown(), this.speed);
+				else
+					clearInterval(this.itvlId);
+				this.paused = !this.paused;
 				break;
 			default:
 				break;
@@ -82,7 +93,7 @@ class Board extends Component{
 			if (!validTetromino([0, 5], newTetro, this.rows, this.cols, newBoard)){
 				// GAMEOVER
 				this.props.endGameHandler();
-				clearInterval(this.id);
+				clearInterval(this.itvlId);
 				this.ended = true;
 				return;
 			}
@@ -96,7 +107,6 @@ class Board extends Component{
 	}
 
 	componentDidMount(){
-		this.id = setInterval(() => this.dropDown(), 150);
 		document.addEventListener("keydown", event => this.inputHandler(event), false);
 	}
 
