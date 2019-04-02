@@ -7,7 +7,7 @@ class Game extends Component{
 	constructor(){
 		super();
 		this.state = {
-			ended: false,
+			ended: true,
 			highscore: 0,
 			score: 0,
 		}
@@ -19,12 +19,18 @@ class Game extends Component{
 		});
 	}
 
+	newGame(){
+		this.setState({
+			ended: false,
+			score: 0
+		})
+	}
+
 	endGame(){
 		const curScore = this.state.score;
 		this.setState({
 			ended: true,
-			score: 0,
-			highscore: curScore
+			highscore: Math.max(this.state.highscore, curScore)
 		});
 	}
 
@@ -33,6 +39,7 @@ class Game extends Component{
 			<Help/>
 			<Board
 				ended={this.state.ended}
+				newGameHandler={() => this.newGame()}
 				endGameHandler={() => this.endGame()}
 				clearedLines={lines => this.addScore(lines)}
 			/>

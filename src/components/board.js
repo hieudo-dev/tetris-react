@@ -12,13 +12,26 @@ class Board extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			currentPos: [0, 5],
-			type: randomTetromino(),
+			currentPos: [-1, -1],
+			type: null,
 			board: Array(this.rows).fill(Array(this.cols).fill("none"))
 		};
 	}
 
+	startGame(){
+		this.setState({
+			currentPos: [0, 5],
+			type: randomTetromino(),
+			board: Array(this.rows).fill(Array(this.cols).fill("none"))
+		});
+		this.props.newGameHandler();
+		this.paused = false;
+		this.itvlId = setInterval(() => this.dropDown(), this.speed);
+	}
+
 	finalBoard(){
+		if(this.state.type === null)
+			return this.state.board;
 		const b = this.state.board.map(x => x.slice());
 		tetrominoSquares(this.state.currentPos, this.state.type).map(
 			square => b[square[0]][square[1]] = tetrominoColors[this.state.type])
@@ -26,32 +39,32 @@ class Board extends Component{
 	}
 
 	inputHandler(event){
-		if (this.props.ended)
-			return;
 		const type = this.state.type;
 		const pos = this.state.currentPos;
 
 		switch(event.keyCode){
 			case 37:	// Left
-				if(this.paused)	return;
+				if(this.paused || this.props.ended)	return;
 				if (validTetromino([pos[0], pos[1]-1], type, this.rows, this.cols, this.state.board))
 				this.setState({currentPos: [pos[0], pos[1]-1]});
 				return;
 			case 38: // Up
-				if(this.paused)	return;
+				if(this.paused || this.props.ended)	return;
 				let newType = rotatedTetromino(type);
 				if (validTetromino(pos, newType, this.rows, this.cols, this.state.board))
 					this.setState({type: newType});
 				return;
 			case 39: // Right
-				if(this.paused)	return;
+				if(this.paused || this.props.ended)	return;
 				if (validTetromino([pos[0], pos[1]+1], type, this.rows, this.cols, this.state.board))
 					this.setState({currentPos: [pos[0], pos[1]+1]});
 				return;
 			case 40: // Down
 				// TODO: Increase drop speed 
 				break;
-			case 32: // Play/Pause
+			case 32: // Start/Pause/Restart
+				if (this.props.ended)
+					return this.startGame();
 				if (this.paused)
 					this.itvlId = setInterval(() => this.dropDown(), this.speed);
 				else
