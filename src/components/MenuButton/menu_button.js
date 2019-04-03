@@ -1,3 +1,4 @@
+import './menu_button.scss';
 import React from 'react';
 
 const MenuButton = ({onClick, link, text, color}) => {

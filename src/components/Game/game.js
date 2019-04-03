@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Board from './board';
-import ScoreBoard from './score_board';
-import Help from './help';
+import Board from '../Board/board';
+import ScoreBoard from '../ScoreBoard/score_board';
+import Help from '../Help/help';
 
 class Game extends Component{
 	constructor(){

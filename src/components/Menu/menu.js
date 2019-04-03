@@ -1,5 +1,6 @@
+import './menu.scss';
 import React from 'react';
-import MenuButton from './menu_button';
+import MenuButton from '../MenuButton/menu_button';
 
 const Menu = ({startGame}) => {
 	return <div className="menu">

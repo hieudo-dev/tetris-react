@@ -1,3 +1,4 @@
+import './score_board.scss';
 import React from 'react';
 
 const ScoreBoard = ({score, highscore}) => {

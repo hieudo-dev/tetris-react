@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import './sass/style.scss';
-import Menu from './components/menu';
-import Game from './components/game';
+import './sass/main.scss';
+import Menu from './components/Menu/menu';
+import Game from './components/Game/game';
 
 class App extends Component{
 	constructor(props) {

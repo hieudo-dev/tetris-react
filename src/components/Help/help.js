@@ -1,3 +1,4 @@
+import './help.scss';
 import React from 'react';
 
 const Help = () => {

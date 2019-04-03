@@ -1,0 +1,41 @@
+@import '../../sass/variables';
+
+.square{
+	border-radius: 1px;
+	margin: -2px 0px;
+	box-sizing: border-box;
+	border: .02px #fff solid;
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.068);
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+}
+
+.square-yellow{
+	border: none;
+	background-color: $color-yellow;
+}
+
+.square-red{
+	border: none;
+	background-color: $color-red;
+}
+
+.square-blue{
+	border: none;
+	background-color: $color-blue;
+}
+
+.square-green{
+	border: none;
+	background-color: $color-green;
+}
+
+.square-cyan{
+	border: none;
+	background-color: $color-cyan;
+}
+
+.square-none{
+	background-color: lighten($color: $color-darkblue, $amount: 5)
+}

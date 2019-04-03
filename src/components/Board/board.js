@@ -1,6 +1,7 @@
+import './board.scss';
 import React, {Component} from 'react';
-import Square from './square';
-import { tetrominoColors, tetrominoSquares, validTetromino, rotatedTetromino, randomTetromino } from "./tetromino";
+import Square from '../Square/square';
+import { tetrominoColors, tetrominoSquares, validTetromino, rotatedTetromino, randomTetromino } from "../../utils/tetromino";
 
 class Board extends Component{
 	rows = 18
