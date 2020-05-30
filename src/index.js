@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import "./sass/main.scss";
+// import "./sass/main.scss";
 import "./assets/main.css";
 import Menu from "./components/Menu/menu";
 import Game from "./components/Game/game";
@@ -8,7 +8,7 @@ import Game from "./components/Game/game";
 class App extends Component {
    constructor(props) {
       super(props);
-      this.state = { playing: false };
+      this.state = { playing: true };
    }
 
    startGame() {

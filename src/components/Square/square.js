@@ -1,9 +1,13 @@
-import React from 'react';
-import './square.scss';
+import React from "react";
+// import "./square.scss";
 
-const Square = ({color}) => {
-	return <div className={"square square-" + color}/>;
-}
-
+const Square = ({ className, color }) => {
+   return (
+      <div
+         className={`${className +
+            (color !== "none" ? " bg-" + color + "-600" : "")}`}
+      />
+   );
+};
 
 export default Square;
