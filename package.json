@@ -1,29 +1,36 @@
 {
-  "name": "tetris-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "node-sass": "^4.11.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
-  "homepage": "http://hdn7.github.io/tetris-react",
-  "scripts": {
-    "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+   "name": "tetris-react",
+   "version": "0.1.0",
+   "private": true,
+   "dependencies": {
+      "node-sass": "^4.11.0",
+      "react": "^16.8.4",
+      "react-dom": "^16.8.4",
+      "react-scripts": "2.1.8"
+   },
+   "homepage": "http://hdn7.github.io/tetris-react",
+   "scripts": {
+      "start": "npm run watch:css && react-scripts start",
+      "build": "npm run build:css && react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+      "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d build"
+   },
+   "eslintConfig": {
+      "extends": "react-app"
+   },
+   "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+   ],
+   "devDependencies": {
+      "autoprefixer": "^9.8.0",
+      "postcss-cli": "^7.1.1",
+      "tailwindcss": "^1.4.6"
+   }
 }
