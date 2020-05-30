@@ -6,7 +6,8 @@
       "node-sass": "^4.11.0",
       "react": "^16.8.4",
       "react-dom": "^16.8.4",
-      "react-scripts": "2.1.8"
+      "react-scripts": "2.1.8",
+      "react-use-gesture": "^7.0.15"
    },
    "homepage": "http://hdn7.github.io/tetris-react",
    "scripts": {

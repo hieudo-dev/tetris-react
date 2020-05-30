@@ -13,7 +13,7 @@ class Board extends Component {
   cols = 12;
   itvlId = 0;
   paused = true;
-  speed = 250;
+  speed = 300;
 
   constructor(props) {
     super(props);
@@ -153,6 +153,22 @@ class Board extends Component {
       event => this.inputHandler(event),
       false
     );
+  }
+
+  componentDidUpdate() {
+    if (this.props.tap === 1) {
+      this.inputHandler({ keyCode: 38 });
+    }
+    if (this.props.swipeX === -1) {
+      this.inputHandler({ keyCode: 37 });
+    }
+    if (this.props.swipeX === 1) {
+      this.inputHandler({ keyCode: 39 });
+    }
+    if (this.props.toggling) {
+      this.inputHandler({ keyCode: 32 });
+    }
+    this.props.toggleEnd();
   }
 
   render() {
