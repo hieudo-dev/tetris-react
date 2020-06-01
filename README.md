@@ -1,5 +1,5 @@
 # Tetris-React
-A Tetris game made using ReactJS and SASS. The game was deployed to GitHub Pages: https://hdn7.github.io/tetris-react/
+A Tetris game made with ReactJS, TailwindCSS,  SASS and React Use Gesture. The game was deployed to GitHub Pages: https://hdn7.github.io/tetris-react/
 
 # Instalation
 ```
