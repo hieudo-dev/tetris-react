@@ -14,9 +14,8 @@ const Game = () => {
 
   const bind = useDrag(
     ({ swipe: [swipeX], tap }) => {
-      // position will either be -1, 0 or 1
       if (swipeX) setSwipeX(swipeX);
-      if (tap) setTap(tap ? 1 : 0);
+      if (tap) setTap(1);
     },
     { swipeDistance: 1 }
   );

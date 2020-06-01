@@ -155,7 +155,7 @@ class Board extends Component {
     );
   }
 
-  componentDidUpdate() {
+  handleTouchInput() {
     if (this.props.tap === 1) {
       this.inputHandler({ keyCode: 38 });
     }
@@ -172,7 +172,9 @@ class Board extends Component {
   }
 
   render() {
+    this.handleTouchInput();
     const board = this.finalBoard();
+
     return (
       <div className="table col-span-2 mx-auto sm:my-auto shadow-2xl border-2 border-white border-opacity-100">
         <div className="table-row-group">
@@ -180,7 +182,7 @@ class Board extends Component {
             <div className="table-row">
               {row.map((color, j) => (
                 <Square
-                  className="table-cell w-6 h-6 border border-white border-opacity-25"
+                  className="table-cell w-7 h-7 border border-white border-opacity-25"
                   key={i.toString() + " " + j.toString()}
                   color={color}
                 />
