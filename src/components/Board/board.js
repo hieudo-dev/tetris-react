@@ -176,7 +176,7 @@ class Board extends Component {
     const board = this.finalBoard();
 
     return (
-      <div className="table col-span-2 mx-auto sm:my-auto shadow-2xl border-2 border-white border-opacity-100">
+      <div className="table col-span-2 mx-auto rounded sm:my-auto shadow-2xl border-2 border-white border-opacity-100">
         <div className="table-row-group">
           {board.map((row, i) => (
             <div className="table-row">

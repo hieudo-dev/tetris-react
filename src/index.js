@@ -6,26 +6,26 @@ import Menu from "./components/Menu/menu";
 import Game from "./components/Game/game";
 
 class App extends Component {
-   constructor(props) {
-      super(props);
-      this.state = { playing: true };
-   }
+  constructor(props) {
+    super(props);
+    this.state = { playing: false };
+  }
 
-   startGame() {
-      this.setState({ playing: true });
-   }
+  startGame() {
+    this.setState({ playing: true });
+  }
 
-   render() {
-      return (
-         <div>
-            {this.state.playing ? (
-               <Game />
-            ) : (
-               <Menu startGame={() => this.startGame()} />
-            )}
-         </div>
-      );
-   }
+  render() {
+    return (
+      <div>
+        {this.state.playing ? (
+          <Game />
+        ) : (
+          <Menu startGame={() => this.startGame()} />
+        )}
+      </div>
+    );
+  }
 }
 
 //=================================>
